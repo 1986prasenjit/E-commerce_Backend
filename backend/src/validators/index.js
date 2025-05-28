@@ -38,4 +38,30 @@ const loginValidator = () => {
     ]
 }
 
-export { registrationValidator, loginValidator }
+const createProductValidator = () => {
+    return [
+        body("name")
+            .trim()
+            .notEmpty()
+            .withMessage("Product Name is required to proceed")
+            .isLength({ min: 3})
+            .withMessage("Porduct Name should be at least of 3 Chars"),
+        body("description")
+            .trim()
+            .notEmpty()
+            .withMessage("Product Description is required")
+            .isLength({min: 20})
+            .withMessage("Description should be at least of 20 Chars"),
+        body("tags")
+            .trim()
+            .notEmpty()
+            .withMessage("Tags Should not be empty")
+            .isArray(),
+        body("price")
+            .trim()
+            .notEmpty()
+            .withMessage("Price is required")
+    ]
+}
+
+export { registrationValidator, loginValidator, createProductValidator }

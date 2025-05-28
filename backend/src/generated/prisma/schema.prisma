@@ -20,12 +20,31 @@ enum UserRole {
 }
 
 model User {
-  id       String   @id @default(uuid())
-  name     String
-  email    String   @unique
-  password String
-  role     UserRole @default(USER)
-  image    String?
+  id                            String    @id @default(uuid())
+  name                          String
+  email                         String    @unique
+  password                      String
+  role                          UserRole  @default(USER)
+  image                         String?
+  isVerified                    Boolean   @default(false)
+  verificationToken             String?
+  verificationTokenExpiry       DateTime?
+  forgotPasswordToken           String?
+  forgotPasswordTokenExpiry     DateTime?
+  forgotPasswordEmailisVerified Boolean   @default(false)
+  refreshToken                  String?
+  refreshTokenExpiry            DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  description String
+  price       Decimal
+  tags        String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

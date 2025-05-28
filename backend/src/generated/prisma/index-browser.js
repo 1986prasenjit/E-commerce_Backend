@@ -127,6 +127,24 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   role: 'role',
   image: 'image',
+  isVerified: 'isVerified',
+  verificationToken: 'verificationToken',
+  verificationTokenExpiry: 'verificationTokenExpiry',
+  forgotPasswordToken: 'forgotPasswordToken',
+  forgotPasswordTokenExpiry: 'forgotPasswordTokenExpiry',
+  forgotPasswordEmailisVerified: 'forgotPasswordEmailisVerified',
+  refreshToken: 'refreshToken',
+  refreshTokenExpiry: 'refreshTokenExpiry',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  tags: 'tags',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -151,7 +169,8 @@ exports.UserRole = exports.$Enums.UserRole = {
 };
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Product: 'Product'
 };
 
 /**

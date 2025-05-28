@@ -6,7 +6,7 @@ import { ApiError } from "../utils/apiErrors.js"
 
 
 const authMiddleware = asyncHandler(async (req, res, next) => {
-    const token = req.cookies?.jwt || req.header("Authorization ")?.replace("Bearer ", "");
+    const token = req.cookies?.jwt || req.header("Authorization")?.replace("Bearer ", "");
 
     if(!token){
         return res
@@ -52,4 +52,25 @@ const authMiddleware = asyncHandler(async (req, res, next) => {
     next()
 })
 
-export { authMiddleware }
+const checkAdmin = asyncHandler(async(req, res, next)=> {
+        const userId = req.user.id;
+        const user = await db.user.findUnique({
+            where:{
+                id: userId
+            },
+            select: {
+                role:true
+            }
+        })
+
+        if(!user || user.role !== "ADMIN"){
+            return res
+            .status(401)
+            .json(
+                new ApiError(401, "Sorry, Access Denied Only ADMIN can create or add Products")
+            )
+        }
+        next()
+})
+
+export { authMiddleware, checkAdmin }
